@@ -22,7 +22,7 @@ const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
 
 // URLs que MP usará al terminar el pago
 // En producción, reemplazá por tu dominio real
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'https://mp-carbon-production.up.railway.app';
 
 
 
