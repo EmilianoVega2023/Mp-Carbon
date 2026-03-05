@@ -3,6 +3,8 @@
 //  La Esquina — Menú con pasarela de pago
 // ─────────────────────────────────────────────
 
+require('dotenv').config();
+
 const http = require('http');
 const fs   = require('fs');
 const path = require('path');
@@ -14,16 +16,20 @@ const url  = require('url');
 // 3. Copiá el Access Token de PRUEBA (empieza con TEST-...)
 // 4. Pegalo acá abajo:
 
-const ACCESS_TOKEN = 'TEST-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';
+console.log('Token cargado:', process.env.ACCESS_TOKEN ? 'SÍ ✓' : 'NO ✗');
+const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
+
 
 // URLs que MP usará al terminar el pago
 // En producción, reemplazá por tu dominio real
 const BASE_URL = 'http://localhost:3000';
 
+
+
 const URLS = {
-  success: BASE_URL + '/success.html',
-  failure: BASE_URL + '/failure.html',
-  pending: BASE_URL + '/pending.html',
+  success: 'https://www.mercadopago.com.ar',
+  failure: 'https://www.mercadopago.com.ar',
+  pending: 'https://www.mercadopago.com.ar',
 };
 
 const PORT = 3000;
@@ -47,7 +53,6 @@ async function createPreference(items) {
   const body = JSON.stringify({
     items,
     back_urls: URLS,
-    auto_return: 'approved',
     statement_descriptor: 'LA ESQUINA',
   });
 
@@ -68,6 +73,7 @@ async function createPreference(items) {
       let data = '';
       res.on('data', chunk => data += chunk);
       res.on('end', () => {
+        console.log('Respuesta MP:', data);
         try { resolve(JSON.parse(data)); }
         catch (e) { reject(e); }
       });
@@ -153,11 +159,12 @@ server.listen(PORT, () => {
   console.log('  ─────────────────────────────────');
   console.log('  Local:   http://localhost:' + PORT);
   console.log('');
-  if (ACCESS_TOKEN.includes('XXXX')) {
-    console.log('  ⚠  Configurá tu ACCESS_TOKEN en server.js');
-    console.log('     mercadopago.com.ar/developers');
-  } else {
-    console.log('  ✓  MercadoPago conectado (modo prueba)');
-  }
+  if (!ACCESS_TOKEN) {
+    console.log('  ⚠  ACCESS_TOKEN no configurado');
+    console.log('     Creá un archivo .env con ACCESS_TOKEN=TEST-...');
+} else {
+    console.log('  ✓  MercadoPago conectado');
+}
   console.log('');
 });
+

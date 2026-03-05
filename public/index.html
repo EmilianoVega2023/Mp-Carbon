@@ -685,7 +685,7 @@ async function checkout() {
     const data = await res.json();
 
     // Redirect to MP checkout
-    window.location.href = data.sandbox_init_point;
+    window.location.href = data.init_point;;
 
   } catch (err) {
     document.getElementById('overlay').classList.remove('show');

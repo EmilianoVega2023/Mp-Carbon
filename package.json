@@ -1,0 +1,25 @@
+{
+  "name": "mp-gastronomia",
+  "version": "1.0.0",
+  "description": "Demo funcional de menú gastronómico con carrito de compras e integración de pagos con MercadoPago Checkout Pro.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmilianoVega2023/Mp-Carbon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/EmilianoVega2023/Mp-Carbon/issues"
+  },
+  "homepage": "https://github.com/EmilianoVega2023/Mp-Carbon#readme",
+  "dependencies": {
+    "dotenv": "^17.3.1"
+  }
+}
