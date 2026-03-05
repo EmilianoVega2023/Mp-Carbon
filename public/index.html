@@ -82,15 +82,21 @@
   .layout {
     display: grid;
     grid-template-columns: 1fr 340px;
-    gap: 0;
+    gap: 32px;
     max-width: 1100px;
     margin: 0 auto;
     padding: 40px 24px;
     align-items: start;
+    box-sizing: border-box;
+  }
+
+  .menu-col {
+    min-width: 0;
+    overflow: hidden;
   }
 
   @media(max-width: 768px) {
-    .layout { grid-template-columns: 1fr; padding: 24px 16px; }
+    .layout { grid-template-columns: 1fr; padding: 24px 16px; gap: 0; }
   }
 
   /* ── CATEGORIES ── */
@@ -710,6 +716,11 @@ function showToast(msg) {
 // ── INIT ──
 renderMenu();
 renderCart();
+
+// Ocultar overlay al volver con el botón atrás (bfcache)
+window.addEventListener('pageshow', function(e) {
+  document.getElementById('overlay').classList.remove('show');
+});
 </script>
 </body>
 </html>
